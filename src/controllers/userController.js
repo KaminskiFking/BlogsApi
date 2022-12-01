@@ -18,7 +18,16 @@ const createUserController = async (req, res) => {
     return res.status(201).json({ token: message });
 };
 
+const getAllUsersController = async (req, res) => {
+  const { type, message } = await userService.findAllUsers();
+  if (type) {
+    return res.status(400).json({ message: 'Invalid fields' });
+  }
+  return res.status(200).json(message);
+};
+
 module.exports = {
   validateUserController,
   createUserController,
+  getAllUsersController,
 };

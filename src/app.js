@@ -1,8 +1,10 @@
 const express = require('express');
 
-const { validateUserController, createUserController } = require('./controllers/userController');
+const { validateUserController, 
+  createUserController, getAllUsersController } = require('./controllers/userController');
 
 const { validateField } = require('./midleewares/validateLoginUser');
+const { validateToken } = require('./midleewares/validateToken');
 const { validateDisplayNameField, 
   validatePasswordField, validateEmailField } = require('./midleewares/validateCreateUser');
 
@@ -19,5 +21,6 @@ app.use(express.json());
 app.post('/login', validateField, validateUserController);
 app.post('/user', validateDisplayNameField, validatePasswordField, 
 validateEmailField, createUserController);
+app.get('/user', validateToken, getAllUsersController);
 
 module.exports = app;

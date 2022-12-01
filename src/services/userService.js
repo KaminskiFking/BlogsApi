@@ -33,7 +33,18 @@ const createUser = async (email, password, displayName, image) => {
   return { type: null, message: token };
 };
 
+const findAllUsers = async () => {
+  const users = await User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
+
+  if (!users) {
+    return { type: 'NOT_FOUND', message: 'Invalid fields' };
+  }
+  // const { password: _undefined, ...userWithoutPassword } = users.dataValues;
+  return { type: null, message: users };
+};
+
 module.exports = {
   validateUser,
   createUser,
+  findAllUsers,
 };
