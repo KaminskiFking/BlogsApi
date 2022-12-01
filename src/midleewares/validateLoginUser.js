@@ -1,14 +1,14 @@
 const Joi = require('joi');
 
-const validCamposPreenchidos = Joi.object({
+const validFieldFilled = Joi.object({
   email: Joi.string().min(1).required(),
   password: Joi.string().min(1).required(),
 });
 
-const validateCamposField = (req, res, next) => {
+const validateField = (req, res, next) => {
   const { email, password } = req.body;
   console.log(email, password);
-  const { error } = validCamposPreenchidos
+  const { error } = validFieldFilled
     .validate({ email, password });
     console.log(error);
   if (error && error.details[0].type === 'any.required') {
@@ -21,5 +21,5 @@ const validateCamposField = (req, res, next) => {
 };
 
 module.exports = {
-  validateCamposField,
+  validateField,
 };

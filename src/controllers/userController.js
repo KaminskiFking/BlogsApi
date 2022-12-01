@@ -9,6 +9,16 @@ const validateUserController = async (req, res) => {
     return res.status(200).json({ token: message });
 };
 
+const createUserController = async (req, res) => {
+  const { displayName, password, email, image } = req.body;
+    const { type, message } = await userService.createUser(email, password, displayName, image);
+  if (type) {
+    return res.status(409).send({ message });
+  }
+    return res.status(201).json({ token: message });
+};
+
 module.exports = {
   validateUserController,
+  createUserController,
 };
