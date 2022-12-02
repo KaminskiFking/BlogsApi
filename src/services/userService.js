@@ -43,8 +43,21 @@ const findAllUsers = async () => {
   return { type: null, message: users };
 };
 
+const findUserById = async (id) => {
+  const users = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+
+  console.log(users);
+
+  if (!users) {
+    return { type: 'NOT_FOUND', message: 'User does not exist' };
+  }
+  // const { password: _undefined, ...userWithoutPassword } = users.dataValues;
+  return { type: null, message: users };
+};
+
 module.exports = {
   validateUser,
   createUser,
   findAllUsers,
+  findUserById,
 };

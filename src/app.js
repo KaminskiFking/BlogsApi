@@ -1,7 +1,8 @@
 const express = require('express');
 
 const { validateUserController, 
-  createUserController, getAllUsersController } = require('./controllers/userController');
+  createUserController, 
+  getAllUsersController, getUserById } = require('./controllers/userController');
 
 const { validateField } = require('./midleewares/validateLoginUser');
 const { validateToken } = require('./midleewares/validateToken');
@@ -22,5 +23,6 @@ app.post('/login', validateField, validateUserController);
 app.post('/user', validateDisplayNameField, validatePasswordField, 
 validateEmailField, createUserController);
 app.get('/user', validateToken, getAllUsersController);
+app.get('/user/:id', validateToken, getUserById);
 
 module.exports = app;
