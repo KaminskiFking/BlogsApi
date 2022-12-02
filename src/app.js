@@ -4,7 +4,8 @@ const { validateUserController,
   createUserController, 
   getAllUsersController, getUserById } = require('./controllers/userController');
 
-  const { createCategoryController } = require('./controllers/categoryController');
+const { createCategoryController, 
+  getAllCategoriesController } = require('./controllers/categoryController');
 
 const { validateField } = require('./midleewares/validateLoginUser');
 const { validateFieldName } = require('./midleewares/validateCategory');
@@ -29,5 +30,6 @@ app.get('/user', validateToken, getAllUsersController);
 app.get('/user/:id', validateToken, getUserById);
 
 app.post('/categories', validateToken, validateFieldName, createCategoryController);
+app.get('/categories', validateToken, getAllCategoriesController);
 
 module.exports = app;
