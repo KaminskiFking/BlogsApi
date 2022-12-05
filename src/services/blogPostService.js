@@ -18,9 +18,7 @@ const createNewBlogPost = async (title, content, categoryIds) => {
   const category = await BlogPost.create({ title, content });
 
   arrayCategory.forEach(async (e) => {
-    console.log(e.id);
-   await PostCategory.create({ postId: category.dataValues.id, categoryId: e.id })
-    
+   await PostCategory.create({ postId: category.dataValues.id, categoryId: e.id });
   });
   return { type: null, message: category };
 };
